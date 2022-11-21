@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="fontawesome-free-6.2.1-web/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Alfian Wardyanto</title>
-    <link rel="icon" href="Jett.jpg">
-</head>
+    <link rel="icon" href="Jett.png">
+ </head>
 <body>
     <div class="grid-2">
         <div class="section-1">
@@ -19,10 +19,47 @@
             <a href="https://www.linkedin.com/in/alfian-wardyanto-6a5315246/"><i class="fab fa-linkedin"></i></a>
             <a href="https://www.instagram.com/awardyanto/"><i class="fab fa-instagram"></i></a>
             <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=alfianwardyanto@gmail.com"><i class="fa-sharp fa-solid fa-envelope"></i></a>
+            <a href="https://github.com/awardyanto"><i class="fa-brands fa-github"></i>
         <div class="button">
-            <a href="https://drive.google.com/file/d/1bxMR7An6Z8hvLiQeHtIxvbaJZIXe8nBf/view?usp=sharing"><button class="btn">Resume</button></a>
+            <a href="https://drive.google.com/file/d/13t15dCkIfuYPIpn76vnuwXhwgb9SAxRm/view?usp=drivesdk"><button class="btn">Resume</button></a>
             <a href="https://drive.google.com/drive/folders/1EEQoVvFpZNslKc9I-HfofhCNrG4AR-q5?usp=sharing"><button class="btn">Certificate</button></a>
-            <a href="https://github.com/awardyanto"><button class="btn">Project</button></a>
+            <button class="btn" id="myBtn">Project</button></a>
+            <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <a href="https://github.com/awardyanto/weblaundry/releases/tag/weblaundry"><button class="btn">Website</button></a>
+    <a href="https://github.com/awardyanto/hijaiyahAR-android/releases/tag/hijaiyahAR"><button class="btn">Android</button></a>
+  </div>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
         </div>
     </div>
         <div class="section-2">
