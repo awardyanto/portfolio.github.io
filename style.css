@@ -97,6 +97,11 @@ body {
   color: #ff4654;
 }
 
+.card a {
+  color: #ffffff; /* link jadi putih */
+  text-decoration: none; /* hilangkan underline */
+}
+
 /* Modal */
 .modal {
   display: none;
