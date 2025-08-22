@@ -1,15 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    min-height: 100vh;
-    background-image: url('2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
@@ -96,11 +95,6 @@ html, body {
 .card h2 {
   margin-top: 0;
   color: #ff4654;
-}
-
-.card a {
-  color: #ffffff;
-  text-decoration: none;
 }
 
 /* Modal */
