@@ -3,69 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Alfian Wardyanto</title>
+  <title>Alfian Wardyanto</title>
   <link rel="icon" href="Jett.png">
-  <link rel="stylesheet" href="fontawesome-free-6.2.1-web/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="grid-2 fade-in">
-    <!-- Bagian kiri -->
-    <div class="section-1 slide-in-left">
-      <img src="Jett.jpg" alt="Foto Profil" class="profile-img zoom-in">
+  <div class="container">
+    <!-- Profile Sidebar -->
+    <aside class="profile-card">
+      <img src="Jett.jpg" class="avatar">
       <h2>Alfian Wardyanto</h2>
       <p>Parung Panjang, Kabupaten Bogor</p>
-      <div class="social-links bounce-in">
+
+      <div class="social-links">
         <a href="https://wa.me/6289654915569"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://www.linkedin.com/in/alfian-wardyanto-6a5315246/"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.instagram.com/awardyanto/"><i class="fab fa-instagram"></i></a>
-        <a href="mailto:alfianwardyanto@gmail.com"><i class="fa-sharp fa-solid fa-envelope"></i></a>
-        <a href="https://github.com/awardyanto"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/in/alfian-wardyanto-6a5315246/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://instagram.com/awardyanto"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:alfianwardyanto@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://github.com/awardyanto"><i class="fab fa-github"></i></a>
       </div>
-      
-      <div class="button fade-up">
-        <a href="https://drive.google.com/file/d/1bxMR7An6Z8hvLiQeHtIxvbaJZIXe8nBf/view?usp=drivesdk">
-          <button class="btn">Resume</button>
-        </a>
-        <a href="https://drive.google.com/drive/folders/1EEQoVvFpZNslKc9I-HfofhCNrG4AR-q5?usp=sharing">
-          <button class="btn">Certificate</button>
-        </a>
-        <button class="btn" id="myBtn">Project</button>
+
+      <div class="buttons">
+        <a href="https://drive.google.com/file/d/1bxMR7An6Z8hvLiQeHtIxvbaJZIXe8nBf/view?usp=drivesdk" class="btn">Resume</a>
+        <a href="https://drive.google.com/drive/folders/1EEQoVvFpZNslKc9I-HfofhCNrG4AR-q5?usp=sharing" class="btn">Certificate</a>
+        <button id="myBtn" class="btn">Projects</button>
       </div>
-    </div>
+    </aside>
 
-    <!-- Bagian kanan -->
-    <div class="section-2 slide-in-right">
-      <h2>About</h2>
-      <p align="justify">
-        Saya adalah seorang Fresh Graduate dari Universitas Pamulang, Teknik Informatika dengan nilai IPK 3.02. 
-        Saya memiliki kepribadian yang jujur, teliti, mau belajar, bersemangat, berorientasi pada detail, mudah beradaptasi, 
-        mampu bekerja sama dalam tim, mampu menjalin komunikasi dengan baik dan bertanggung jawab.
-      </p>
+    <!-- Content -->
+    <main class="content">
+      <section class="card">
+        <h2>About</h2>
+        <p>Saya adalah seorang Fresh Graduate dari Universitas Pamulang, Teknik Informatika dengan nilai IPK 3.02. Saya memiliki kepribadian yang jujur, teliti, mau belajar, bersemangat, berorientasi pada detail, mudah beradaptasi, mampu bekerja sama dalam tim, mampu menjalin komunikasi dengan baik dan bertanggung jawab.</p>
+      </section>
 
-      <h2>Skills</h2>
-      <ul class="fade-up">
-        <li>Microsoft Office</li>
-        <li>Design</li>
-        <li>Networking</li>
-        <li>Troubleshooting</li>
-        <li>Windows, MacOS</li>
-        <li>MySQL</li>
-        <li>PHP</li>
-      </ul>
+      <section class="card">
+        <h2>Skills</h2>
+        <ul>
+          <li>Microsoft Office</li>
+          <li>Design</li>
+          <li>Networking</li>
+          <li>Troubleshooting</li>
+          <li>Windows, MacOS</li>
+          <li>MySQL</li>
+          <li>PHP</li>
+        </ul>
+      </section>
 
-      <h2>Contact</h2>
-      <a href="mailto:alfianwardyanto@gmail.com">alfianwardyanto@gmail.com</a>
-    </div>
+      <section class="card">
+        <h2>Contact</h2>
+        <p><a href="mailto:alfianwardyanto@gmail.com">alfianwardyanto@gmail.com</a></p>
+      </section>
+    </main>
   </div>
 
   <!-- Modal -->
   <div id="myModal" class="modal">
-    <div class="modal-content scale-in">
+    <div class="modal-content">
       <span class="close">&times;</span>
-      <a href="https://github.com/awardyanto/weblaundry/releases/tag/weblaundry"><button class="btn">Website</button></a>
-      <a href="https://github.com/awardyanto/hijaiyahAR-android/releases/tag/hijaiyahAR"><button class="btn">Android</button></a>
-      <a href="https://github.com/awardyanto/uangkas-java/releases/tag/uangkas"><button class="btn">Java</button></a>
+      <h2>Projects</h2>
+      <a href="https://github.com/awardyanto/weblaundry/releases/tag/weblaundry" class="btn">Website</a>
+      <a href="https://github.com/awardyanto/hijaiyahAR-android/releases/tag/hijaiyahAR" class="btn">Android</a>
+      <a href="https://github.com/awardyanto/uangkas-java/releases/tag/uangkas" class="btn">Java</a>
     </div>
   </div>
 
