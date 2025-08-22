@@ -1,82 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="fontawesome-free-6.2.1-web/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Alfian Wardyanto</title>
-    <link rel="icon" href="Jett.png">
- </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Alfian Wardyanto</title>
+  <link rel="icon" href="Jett.png">
+  <link rel="stylesheet" href="fontawesome-free-6.2.1-web/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <div class="grid-2">
-        <div class="section-1">
-            <img src="Jett.jpg"></i>
-            <h2>Alfian Wardyanto</h2>
-            <p>Parung Panjang, Kabupaten Bogor</p>
-            <a href="https://wa.me/6289654915569"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.linkedin.com/in/alfian-wardyanto-6a5315246/"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/awardyanto/"><i class="fab fa-instagram"></i></a>
-            <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=alfianwardyanto@gmail.com"><i class="fa-sharp fa-solid fa-envelope"></i></a>
-            <a href="https://github.com/awardyanto"><i class="fa-brands fa-github"></i>
-        <div class="button">
-            <a href="https://drive.google.com/file/d/1bxMR7An6Z8hvLiQeHtIxvbaJZIXe8nBf/view?usp=drivesdk"><button class="btn">Resume</button></a>
-            <a href="https://drive.google.com/drive/folders/1EEQoVvFpZNslKc9I-HfofhCNrG4AR-q5?usp=sharing"><button class="btn">Certificate</button></a>
-            <button class="btn" id="myBtn">Project</button></a>
-            <div id="myModal" class="modal">
+  <div class="grid-2">
+    <!-- Bagian kiri -->
+    <div class="section-1">
+      <img src="Jett.jpg" alt="Foto Profil">
+      <h2>Alfian Wardyanto</h2>
+      <p>Parung Panjang, Kabupaten Bogor</p>
+      <div class="social-links">
+        <a href="https://wa.me/6289654915569"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.linkedin.com/in/alfian-wardyanto-6a5315246/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/awardyanto/"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:alfianwardyanto@gmail.com"><i class="fa-sharp fa-solid fa-envelope"></i></a>
+        <a href="https://github.com/awardyanto"><i class="fa-brands fa-github"></i></a>
+      </div>
+      
+      <div class="button">
+        <a href="https://drive.google.com/file/d/1bxMR7An6Z8hvLiQeHtIxvbaJZIXe8nBf/view?usp=drivesdk">
+          <button class="btn">Resume</button>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1EEQoVvFpZNslKc9I-HfofhCNrG4AR-q5?usp=sharing">
+          <button class="btn">Certificate</button>
+        </a>
+        <button class="btn" id="myBtn">Project</button>
+      </div>
+    </div>
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <a href="https://github.com/awardyanto/weblaundry/releases/tag/weblaundry"><button class="btn">Website</button></a>
-    <a href="https://github.com/awardyanto/hijaiyahAR-android/releases/tag/hijaiyahAR"><button class="btn">Android</button></a>
-    <a href="https://github.com/awardyanto/uangkas-java/releases/tag/uangkas"><button class="btn">Java</button></a>
+    <!-- Bagian kanan -->
+    <div class="section-2">
+      <h2>About</h2>
+      <p align="justify">
+        Saya adalah seorang Fresh Graduate dari Universitas Pamulang, Teknik Informatika dengan nilai IPK 3.02. 
+        Saya memiliki kepribadian yang jujur, teliti, mau belajar, bersemangat, berorientasi pada detail, mudah beradaptasi, 
+        mampu bekerja sama dalam tim, mampu menjalin komunikasi dengan baik dan bertanggung jawab.
+      </p>
+
+      <h2>Skills</h2>
+      <ul>
+        <li>Microsoft Office</li>
+        <li>Design</li>
+        <li>Networking</li>
+        <li>Troubleshooting</li>
+        <li>Windows, MacOS</li>
+        <li>MySQL</li>
+        <li>PHP</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <a href="mailto:alfianwardyanto@gmail.com">alfianwardyanto@gmail.com</a>
+    </div>
   </div>
-</div>
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-        </div>
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <a href="https://github.com/awardyanto/weblaundry/releases/tag/weblaundry"><button class="btn">Website</button></a>
+      <a href="https://github.com/awardyanto/hijaiyahAR-android/releases/tag/hijaiyahAR"><button class="btn">Android</button></a>
+      <a href="https://github.com/awardyanto/uangkas-java/releases/tag/uangkas"><button class="btn">Java</button></a>
     </div>
-        <div class="section-2">
-            <h2>About</h2>
-            <p align="justify">Saya adalah seorang Fresh Graduate dari Universitas Pamulang, Teknik Informatika dengan nilai IPK 3.02. Saya memiliki kepribadian yang jujur, teliti, mau belajar, bersemangat, berorientasi pada detail, mudah beradaptasi, mampu bekerja sama dalam tim, mampu menjalin komunikasi dengan baik dan bertanggung jawab.</p>
-            <h2>Skills</h2>
-            <li>Microsoft Office</li>
-            <li>Design</li>
-            <li>Networking</li>
-            <li>Troubleshooting</li>
-            <li>Windows, MacOS</li>
-            <li>MySQL</li>
-            <li>PHP</li>
-            <h2>Contact</h2>
-            <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=alfianwardyanto@gmail.com">alfianwardyanto@gmail.com</a>
-        </div>
-    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
