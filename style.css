@@ -1,10 +1,46 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-/* Grid */
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* Animasi umum */
+.fade-in { animation: fadeIn 1.5s ease-in-out; }
+.fade-up { animation: fadeUp 1.2s ease-out; }
+.slide-in-left { animation: slideInLeft 1s ease-out; }
+.slide-in-right { animation: slideInRight 1s ease-out; }
+.zoom-in { animation: zoomIn 1s ease-in-out; }
+.bounce-in { animation: bounceIn 1.2s ease-in-out; }
+.scale-in { animation: scaleIn 0.8s ease-in-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideInRight {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); }
 
 /* Body */
 body {
@@ -18,40 +54,16 @@ body {
 }
 
 /* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
-.modal-content {
-  background-image: url('2.png');
-  background-repeat: no-repeat;
-  margin: 15% auto;
-  padding: 40px 20px 35px 45px;
-  width: 50%;
-}
-.close {
-  color: #fff;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover, .close:focus {
-  color: #ff4654;
-  cursor: pointer;
-}
+.modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); }
+.modal-content { background-image: url('2.png'); margin: 15% auto; padding: 40px 20px; width: 50%; }
+.close { color: #fff; float: right; font-size: 28px; font-weight: bold; }
+.close:hover { color: #ff4654; cursor: pointer; }
 
 /* Button */
-.button {
-  margin-top: 15px;
-}
+.button { margin-top: 15px; }
 .btn {
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
   border: 2px solid #ff4654;
   background-color: transparent;
   height: 45px; width: 166px;
@@ -63,55 +75,26 @@ body {
 .btn:hover {
   background-color: #ff4654;
   color: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.5);
 }
 
 /* Section 1 */
-.section-1 {
-  padding-top: 18vh;
-  text-align: center;
-}
-.section-1 h2 {
-  color: #ff4654;
-}
-.section-1 p {
-  color: #fff;
-}
-.section-1 a {
-  font-size: 1.5rem;
-  padding: 10px;
-}
-.section-1 a:hover {
-  color: #ff4654;
-}
+.section-1 { padding-top: 18vh; text-align: center; }
+.section-1 h2 { color: #ff4654; }
+.section-1 p { color: #fff; }
+.section-1 a { font-size: 1.5rem; padding: 10px; }
+.section-1 a:hover { color: #ff4654; transform: scale(1.2); transition: 0.3s; }
 
 /* Section 2 */
-.section-2 {
-  padding: 20px 50px;
-  background-image: url('1.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #fff;
-}
-.section-2 li {
-  margin-bottom: 8px;
-}
-.section-2 a {
-  color: #fff;
-  text-decoration: none;
-}
-.section-2 a:hover {
-  color: #ff4654;
-}
+.section-2 { padding: 20px 50px; background-image: url('1.png'); color: #fff; }
+.section-2 li { margin-bottom: 8px; }
+.section-2 a { color: #fff; text-decoration: none; }
+.section-2 a:hover { color: #ff4654; }
 
 /* Responsive */
 @media(max-width:780px){
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-  .section-1 {
-    padding-top: 5rem;
-  }
-  .section-2 {
-    padding: 1.5rem;
-  }
+  .grid-2 { grid-template-columns: 1fr; }
+  .section-1 { padding-top: 5rem; }
+  .section-2 { padding: 1.5rem; }
 }
