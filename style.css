@@ -98,6 +98,11 @@ html, body {
   color: #ff4654;
 }
 
+.card a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 /* Modal */
 .modal {
   display: none;
