@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PORTOFOLIO - ALFIAN WARDYANTO</title>
+  <link rel="icon" href="assets/img/persona-bg.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/persona.css">
+</head>
+<body>
+
+  <main class="p5-stage">
+    <!-- Video Background -->
+    <video class="p5-bg-video" autoplay muted loop playsinline>
+      <source src="assets/img/persona-bg.mp4" type="video/mp4">
+    </video>
+
+    <!-- Pengalih Bahasa & Musik Pojok Kanan Atas -->
+    <div class="top-controls">
+      <button type="button" id="bgmToggle" class="lang-btn bgm-btn" title="Toggle Background Music">
+        <i class="fas fa-volume-mute" id="bgmIcon"></i>
+        <span id="bgmText">BGM: OFF</span>
+      </button>
+      <button type="button" id="langSwitch" class="lang-btn">LANG: ID</button>
+    </div>
+
+    <!-- Audio Theme Song -->
+    <audio id="themeSong" src="assets/img/song.mp3" loop preload="auto"></audio>
+
+    <!-- Menu Navigasi Utama Kiri (Ransom-Note Style) -->
+    <nav class="left-menu" aria-label="Main Menu">
+      <button type="button" class="p5-menu-item" data-section="overview">
+        <span class="rn-word">
+          <span class="rn-char inv">O</span><span class="rn-char">V</span><span class="rn-char">E</span><span class="rn-char">R</span><span class="rn-char red">V</span><span class="rn-char inv">I</span><span class="rn-char">E</span><span class="rn-char">W</span>
+        </span>
+      </button>
+
+      <button type="button" class="p5-menu-item" data-section="experience">
+        <span class="rn-word">
+          <span class="rn-char red">E</span><span class="rn-char">X</span><span class="rn-char">P</span><span class="rn-char inv">E</span><span class="rn-char">R</span><span class="rn-char">I</span><span class="rn-char">E</span><span class="rn-char">N</span><span class="rn-char">C</span><span class="rn-char">E</span>
+        </span>
+      </button>
+
+      <button type="button" class="p5-menu-item" data-section="skills">
+        <span class="rn-word">
+          <span class="rn-char inv">T</span><span class="rn-char">E</span><span class="rn-char">C</span><span class="rn-char inv">H</span><span class="rn-char">&nbsp;</span><span class="rn-char">S</span><span class="rn-char">T</span><span class="rn-char">A</span><span class="rn-char">C</span><span class="rn-char">K</span>
+        </span>
+      </button>
+
+      <button type="button" class="p5-menu-item" data-section="projects">
+        <span class="rn-word">
+          <span class="rn-char red">P</span><span class="rn-char">R</span><span class="rn-char">O</span><span class="rn-char inv">J</span><span class="rn-char">E</span><span class="rn-char">C</span><span class="rn-char">T</span><span class="rn-char red">S</span>
+        </span>
+      </button>
+
+      <button type="button" class="p5-menu-item" data-section="contact">
+        <span class="rn-word">
+          <span class="rn-char">C</span><span class="rn-char">O</span><span class="rn-char red">N</span><span class="rn-char">T</span><span class="rn-char">A</span><span class="rn-char">C</span><span class="rn-char inv">T</span>
+        </span>
+      </button>
+
+      <a href="https://drive.google.com/drive/folders/1weL-RL8nS9RoNK3S58cfN3n9QLTG3W2J?usp=sharing"
+         target="_blank" rel="noopener" class="p5-menu-item">
+        <span class="rn-word">
+          <span class="rn-char inv">R</span><span class="rn-char">E</span><span class="rn-char inv">S</span><span class="rn-char">U</span><span class="rn-char">M</span><span class="rn-char red">E</span>
+        </span>
+      </a>
+
+      <a href="https://drive.google.com/drive/folders/1EEQoVvFpZNslKc9I-HfofhCNrG4AR-q5?usp=sharing"
+         target="_blank" rel="noopener" class="p5-menu-item">
+        <span class="rn-word">
+          <span class="rn-char">C</span><span class="rn-char">E</span><span class="rn-char">R</span><span class="rn-char">T</span><span class="rn-char">I</span><span class="rn-char inv">F</span><span class="rn-char">I</span><span class="rn-char">C</span><span class="rn-char">A</span><span class="rn-char">T</span><span class="rn-char">E</span><span class="rn-char red">S</span>
+        </span>
+      </a>
+    </nav>
+
+    <!-- Bagian Bawah Full Layar -->
+    <div class="bottom-banner-wrap">
+      <div class="yen-badge">
+        <span class="yen-sym">¥</span>
+        <span class="yen-num">3+</span>
+        <span class="yen-label" id="yenLabel">TAHUN</span>
+      </div>
+
+      <div class="name-slash-banner">
+        <div class="hero-name">
+          <span class="rn-char inv">A</span><span class="rn-char">L</span><span class="rn-char">F</span><span class="rn-char red">I</span><span class="rn-char">A</span><span class="rn-char">N</span><span class="rn-char">&nbsp;</span><span class="rn-char red">W</span><span class="rn-char">A</span><span class="rn-char">R</span><span class="rn-char inv">D</span><span class="rn-char">Y</span><span class="rn-char">A</span><span class="rn-char">N</span><span class="rn-char">T</span><span class="rn-char inv">O</span>
+        </div>
+        <div class="hero-role">SOFTWARE ENGINEER — FRAUD DETECTION SYSTEM</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Panel Dossier -->
+  <div id="dossierModal" class="p5-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="p5-dossier">
+      <div class="dossier-header">
+        <div class="dossier-title-wrap">
+          <span id="dossierCode" class="dossier-badge">00 // DOSSIER</span>
+          <h2 id="dossierTitle">OVERVIEW</h2>
+        </div>
+        <button type="button" id="closeDossier" class="close-btn">ESC / CLOSE</button>
+      </div>
+      <div id="dossierBody" class="dossier-body"></div>
+    </div>
+  </div>
+
+  <!-- Efek Transisi Slash ala Persona 5 -->
+  <div id="p5SlashFx" class="p5-slash-fx" aria-hidden="true">
+    <div class="slash-layer slash-red"></div>
+    <div class="slash-layer slash-black"></div>
+    <div class="slash-layer slash-white"></div>
+  </div>
+
+  <script src="assets/js/persona.js"></script>
+</body>
+</html>

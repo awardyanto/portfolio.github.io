@@ -1,0 +1,832 @@
+:root {
+  --p5-red: #e60012;
+  --p5-black: #0a0a0a;
+  --p5-white: #ffffff;
+  --p5-cyan: #00e5ff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--p5-black);
+  color: var(--p5-white);
+  font-family: 'Rajdhani', sans-serif;
+  overflow: hidden;
+}
+
+/* =========================================
+   KANVAS UTAMA & VIDEO BACKGROUND
+   ========================================= */
+.p5-stage {
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  overflow: hidden;
+  user-select: none;
+}
+
+.p5-stage.p5-shake {
+  animation: p5Shake 0.22s ease-out;
+}
+
+@keyframes p5Shake {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-5px, 3px); }
+  50%  { transform: translate(4px, -2px); }
+  75%  { transform: translate(-2px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+.p5-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  z-index: -1;
+  pointer-events: none;
+  transform: scale(1.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.p5-stage.panel-open .p5-bg-video {
+  transform: scale(1.06) translate3d(-3vw, 0, 0);
+}
+
+/* =========================================
+   KONTROL BAHASA & MUSIK (KANAN ATAS)
+   ========================================= */
+.top-controls {
+  position: absolute;
+  top: clamp(10px, 2vh, 24px);
+  right: clamp(12px, 2vw, 28px);
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.8vw, 12px);
+  z-index: 30;
+}
+
+.bgm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bgm-btn.playing {
+  background: var(--p5-red);
+  color: var(--p5-white);
+  border-color: var(--p5-white);
+  box-shadow: 4px 4px 0 var(--p5-black);
+}
+
+.bgm-btn.playing i {
+  animation: pulseAudio 0.9s infinite alternate;
+}
+
+@keyframes pulseAudio {
+  from { transform: scale(0.95); }
+  to   { transform: scale(1.2); }
+}
+
+.lang-btn {
+  background: var(--p5-black);
+  color: var(--p5-white);
+  border: 2px solid var(--p5-white);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(11px, min(1vw, 1.9vh), 16px);
+  font-weight: 700;
+  padding: clamp(4px, 0.6vh, 8px) clamp(10px, 1.2vw, 16px);
+  cursor: pointer;
+  transform: skewX(-12deg);
+  box-shadow: 4px 4px 0 var(--p5-red);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.lang-btn:hover {
+  background: var(--p5-red);
+  border-color: var(--p5-black);
+  box-shadow: 4px 4px 0 var(--p5-white);
+  transform: skewX(-12deg) scale(1.06);
+}
+
+/* =========================================
+   MENU KIRI (RANSOM-NOTE DINAMIS)
+   ========================================= */
+.left-menu {
+  position: absolute;
+  top: 49%;
+  left: clamp(14px, 2.8vw, 48px);
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(8px, 1.4vh, 20px);
+  z-index: 20;
+}
+
+.p5-menu-item {
+  position: relative;
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.p5-menu-item:nth-child(odd)  { transform: rotate(-2.2deg); }
+.p5-menu-item:nth-child(even) { transform: rotate(1.6deg); }
+.p5-menu-item:nth-child(4)    { margin-left: clamp(6px, 1.2vw, 24px); }
+.p5-menu-item:nth-child(5)    { margin-left: clamp(10px, 1.8vw, 34px); }
+.p5-menu-item:nth-child(6)    { margin-left: clamp(16px, 2.8vw, 52px); }
+.p5-menu-item:nth-child(7)    { margin-left: clamp(8px, 1.4vw, 28px); }
+
+.p5-menu-item:hover,
+.p5-menu-item.active-key {
+  transform: scale(1.1) rotate(-3deg) translateX(12px);
+  z-index: 25;
+}
+
+.p5-menu-item.is-active {
+  transform: scale(1.12) rotate(-3deg) translateX(18px) !important;
+  z-index: 26;
+}
+
+.p5-menu-item.is-active::before {
+  content: "▶";
+  position: absolute;
+  left: -26px;
+  color: var(--p5-white);
+  font-size: 20px;
+  text-shadow: 3px 3px 0 var(--p5-red), -2px -2px 0 var(--p5-black);
+  animation: p5CursorBounce 0.55s infinite alternate ease-in-out;
+}
+
+@keyframes p5CursorBounce {
+  from { transform: translateX(0) scale(1); }
+  to   { transform: translateX(6px) scale(1.15); }
+}
+
+.p5-menu-item:active {
+  transform: scale(0.94) rotate(-5deg) !important;
+}
+
+.rn-word {
+  display: inline-flex;
+  align-items: center;
+  background: var(--p5-black);
+  padding: clamp(6px, 0.9vh, 14px) clamp(10px, 1.3vw, 22px);
+  border: clamp(2px, 0.25vw, 3px) solid var(--p5-black);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.85);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.rn-char {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(28px, min(4.2vw, 5.8vh), 64px);
+  line-height: 1;
+  padding: 1px clamp(2px, 0.25vw, 5px);
+  display: inline-block;
+  color: var(--p5-white);
+  transition: transform 0.15s ease;
+}
+
+.rn-char.inv {
+  background: var(--p5-white);
+  color: var(--p5-black);
+  transform: rotate(-4deg) scale(1.06);
+  margin: 0 2px;
+}
+
+.rn-char.red {
+  background: var(--p5-red);
+  color: var(--p5-white);
+  transform: rotate(4deg) scale(1.06);
+  margin: 0 2px;
+}
+
+.p5-menu-item:hover .rn-word,
+.p5-menu-item.active-key .rn-word,
+.p5-menu-item.is-active .rn-word {
+  background: var(--p5-red);
+  border-color: var(--p5-white);
+  box-shadow: 8px 8px 0 var(--p5-black);
+}
+
+.p5-menu-item:hover .rn-char.red,
+.p5-menu-item.active-key .rn-char.red,
+.p5-menu-item.is-active .rn-char.red {
+  background: var(--p5-black);
+  color: var(--p5-white);
+}
+
+.p5-menu-item:hover .rn-char.inv {
+  transform: rotate(3deg) scale(1.1);
+}
+
+/* =========================================
+   SPANDUK BAWAH FULL LAYAR
+   ========================================= */
+.bottom-banner-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 22vh;
+  z-index: 18;
+  pointer-events: none;
+}
+
+.yen-badge {
+  position: absolute;
+  bottom: clamp(12px, 2.5vh, 32px);
+  left: clamp(14px, 2.2vw, 40px);
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  transform: rotate(-5deg);
+  text-shadow: 4px 4px 0 var(--p5-black), -2px -2px 0 var(--p5-black);
+}
+
+.yen-sym   { font-family: 'Anton', sans-serif; font-size: clamp(26px, min(3.8vw, 6vh), 60px); }
+.yen-num   { font-family: 'Anton', sans-serif; font-size: clamp(22px, min(3.1vw, 5vh), 50px); }
+.yen-label { font-family: 'Anton', sans-serif; font-size: clamp(12px, min(1.5vw, 2.5vh), 24px); letter-spacing: 0.05em; }
+
+.name-slash-banner {
+  position: absolute;
+  bottom: -2.5vh;
+  left: 50%;
+  width: clamp(300px, 62vw, 1080px);
+  background: var(--p5-black);
+  border-top: 4px solid var(--p5-white);
+  border-left: 4px solid var(--p5-white);
+  border-right: 4px solid var(--p5-white);
+  padding: clamp(10px, 1.4vh, 18px) clamp(16px, 2.2vw, 36px) clamp(36px, 6vh, 60px);
+  transform: translateX(-50%) rotate(-3deg);
+  box-shadow: 0 -6px 0 var(--p5-red);
+  text-align: center;
+}
+
+.hero-name {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.hero-name .rn-char {
+  font-size: clamp(28px, min(4.2vw, 6.2vh), 64px);
+  line-height: 1;
+  padding: 2px clamp(2px, 0.25vw, 5px);
+}
+
+.hero-role {
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(10px, min(1.2vw, 2vh), 20px);
+  letter-spacing: 0.1em;
+  color: var(--p5-cyan);
+  margin-top: 4px;
+}
+
+/* =========================================
+   PANEL DOSSIER KANAN (SLIDE-IN ALA PERSONA 5)
+   ========================================= */
+.p5-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5.5rem clamp(14px, 2.5vw, 36px) 7.5rem 1rem;
+}
+
+.p5-modal-backdrop.open {
+  display: flex;
+}
+
+.p5-dossier {
+  pointer-events: auto;
+  width: min(44vw, 600px);
+  max-height: 74vh;
+  background-color: rgba(10, 10, 10, 0.95);
+  background-image: radial-gradient(rgba(230, 0, 18, 0.16) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+  border: 4px solid var(--p5-white);
+  box-shadow: -12px 12px 0 var(--p5-red);
+  clip-path: polygon(0 12px, 100% 0, 98.5% 100%, 1.5% 98.5%);
+  transform: rotate(-1deg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideInP5 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInP5 {
+  from {
+    transform: translateX(110%) skewX(-6deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) skewX(0deg);
+    opacity: 1;
+  }
+}
+
+.dossier-header {
+  background: var(--p5-red);
+  color: var(--p5-white);
+  padding: 1.1rem 1.4rem 1.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  clip-path: polygon(0 0, 100% 0, 100% 84%, 0 100%);
+}
+
+.dossier-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dossier-badge {
+  background: var(--p5-black);
+  color: var(--p5-white);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  transform: skewX(-12deg);
+}
+
+.dossier-header h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 0 var(--p5-black);
+}
+
+.close-btn {
+  background: var(--p5-black);
+  color: var(--p5-white);
+  border: 2px solid var(--p5-white);
+  font-family: 'Anton', sans-serif;
+  font-size: 1rem;
+  padding: 4px 14px;
+  cursor: pointer;
+  transform: skewX(-12deg);
+}
+
+.close-btn:hover {
+  background: var(--p5-white);
+  color: var(--p5-black);
+}
+
+.dossier-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  line-height: 1.6;
+}
+
+.dossier-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dossier-body::-webkit-scrollbar-track {
+  background: #111;
+  border-left: 1px solid #333;
+}
+
+.dossier-body::-webkit-scrollbar-thumb {
+  background: var(--p5-red);
+  border: 1px solid var(--p5-white);
+}
+
+/* Animasi Stagger untuk Isi Panel */
+.dossier-body .p5-card,
+.dossier-body .exp-block,
+.dossier-body .skill-group,
+.dossier-body .contact-item {
+  opacity: 0;
+  animation: p5ItemPop 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dossier-body > *:nth-child(1) { animation-delay: 0.06s; }
+.dossier-body > *:nth-child(2) { animation-delay: 0.12s; }
+.dossier-body > *:nth-child(3) { animation-delay: 0.18s; }
+.dossier-body > *:nth-child(4) { animation-delay: 0.24s; }
+
+@keyframes p5ItemPop {
+  from {
+    opacity: 0;
+    transform: translateX(28px) skewX(-6deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.p5-card {
+  background: #141414;
+  border: 2px solid var(--p5-white);
+  padding: 1rem;
+  box-shadow: 5px 5px 0 var(--p5-red);
+}
+
+.dossier-body .p5-card:nth-child(odd)  { transform: rotate(-0.8deg); }
+.dossier-body .p5-card:nth-child(even) { transform: rotate(0.6deg); }
+
+.p5-card .tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--p5-cyan);
+}
+
+.p5-card .big {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.4rem;
+  color: var(--p5-white);
+  margin: 0.15rem 0;
+}
+
+.p5-card .sub {
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
+.exp-block {
+  border-left: 4px solid var(--p5-red);
+  padding-left: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.exp-head h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.25rem;
+}
+
+.period-pill {
+  background: var(--p5-white);
+  color: var(--p5-black);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  transform: skewX(-10deg);
+}
+
+.exp-list {
+  list-style: none;
+}
+
+.exp-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: #e5e5e5;
+}
+
+.exp-list li::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  color: var(--p5-red);
+  font-size: 0.8rem;
+}
+
+.skill-group {
+  margin-bottom: 1rem;
+}
+
+.skill-group h4 {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--p5-cyan);
+  margin-bottom: 0.45rem;
+}
+
+.chip-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.p5-chip {
+  background: var(--p5-white);
+  color: var(--p5-black);
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border: 2px solid var(--p5-black);
+  box-shadow: 3px 3px 0 var(--p5-red);
+}
+
+.filter-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.f-btn {
+  background: #1a1a1a;
+  color: var(--p5-white);
+  border: 2px solid var(--p5-white);
+  font-family: 'Share Tech Mono', monospace;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.f-btn.active,
+.f-btn:hover {
+  background: var(--p5-red);
+}
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.proj-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  background: var(--p5-red);
+  color: var(--p5-white);
+  text-decoration: none;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border: 1px solid var(--p5-white);
+}
+
+.proj-link:hover {
+  background: var(--p5-white);
+  color: var(--p5-black);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.85rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: #141414;
+  border: 2px solid var(--p5-white);
+  padding: 0.85rem;
+  text-decoration: none;
+  color: var(--p5-white);
+  box-shadow: 4px 4px 0 var(--p5-red);
+  transition: 0.15s;
+}
+
+.contact-item:hover {
+  background: var(--p5-red);
+  transform: translate(-2px, -2px);
+}
+
+.contact-item i {
+  font-size: 1.4rem;
+}
+
+/* =========================================
+   EFEK SLASH WIPE (BUKA & TUTUP)
+   ========================================= */
+.p5-slash-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+  display: none;
+}
+
+.p5-slash-fx.active {
+  display: block;
+}
+
+.slash-layer {
+  position: absolute;
+  top: -25%;
+  left: -150%;
+  width: 145%;
+  height: 150%;
+  transform: skewX(-24deg);
+}
+
+.slash-red {
+  background: var(--p5-red);
+}
+
+.slash-black {
+  background: var(--p5-black);
+  border-left: 8px solid var(--p5-white);
+  border-right: 8px solid var(--p5-white);
+}
+
+.slash-white {
+  background: var(--p5-white);
+  width: 14%;
+}
+
+.p5-slash-fx.active .slash-red {
+  animation: p5Sweep 0.42s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.p5-slash-fx.active .slash-black {
+  animation: p5Sweep 0.42s cubic-bezier(0.77, 0, 0.175, 1) 0.045s forwards;
+}
+
+.p5-slash-fx.active .slash-white {
+  animation: p5Sweep 0.36s cubic-bezier(0.77, 0, 0.175, 1) 0.08s forwards;
+}
+
+@keyframes p5Sweep {
+  0%   { left: -155%; }
+  45%  { left: -15%; }
+  100% { left: 135%; }
+}
+
+.p5-slash-fx.reverse .slash-layer {
+  left: 135%;
+  transform: skewX(24deg);
+}
+
+.p5-slash-fx.active.reverse .slash-red {
+  animation: p5SweepReverse 0.42s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.p5-slash-fx.active.reverse .slash-black {
+  animation: p5SweepReverse 0.42s cubic-bezier(0.77, 0, 0.175, 1) 0.045s forwards;
+}
+
+.p5-slash-fx.active.reverse .slash-white {
+  animation: p5SweepReverse 0.36s cubic-bezier(0.77, 0, 0.175, 1) 0.08s forwards;
+}
+
+@keyframes p5SweepReverse {
+  0%   { left: 135%; }
+  45%  { left: -15%; }
+  100% { left: -155%; }
+}
+
+/* =========================================
+   RESPONSIF DINAMIS DI HP (PORTRAIT)
+   ========================================= */
+@media (max-width: 820px) {
+  .p5-bg-video {
+    object-position: 46% 18%;
+  }
+
+  .p5-stage.panel-open .p5-bg-video {
+    transform: scale(1.02);
+  }
+
+  .top-controls {
+    gap: 6px;
+  }
+
+  .lang-btn {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .yen-badge {
+    display: none;
+  }
+
+  .left-menu {
+    top: auto;
+    bottom: 13.5vh;
+    left: 3vw;
+    width: 94vw;
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .p5-menu-item:nth-child(n) {
+    margin-left: 0;
+    width: 100%;
+    transform: none;
+  }
+
+  .p5-menu-item:last-child {
+    grid-column: span 2;
+  }
+
+  .p5-menu-item.is-active {
+    transform: none !important;
+  }
+
+  .p5-menu-item.is-active::before {
+    display: none;
+  }
+
+  .rn-word {
+    width: 100%;
+    justify-content: center;
+    padding: 6px 4px;
+  }
+
+  .rn-char {
+    font-size: clamp(14px, 4.2vw, 22px);
+    padding: 1px 1.5px;
+  }
+
+  .bottom-banner-wrap {
+    height: 12vh;
+  }
+
+  .name-slash-banner {
+    width: 104vw;
+    bottom: -10px;
+    padding: 8px 12px 24px;
+    transform: translateX(-50%) rotate(-2deg);
+  }
+
+  .hero-name .rn-char {
+    font-size: clamp(18px, 5.2vw, 28px);
+    padding: 1px 1.5px;
+  }
+
+  .p5-modal-backdrop {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    pointer-events: auto;
+    z-index: 100;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .p5-dossier {
+    width: 100%;
+    max-width: 100%;
+    max-height: 84vh;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: 0 -8px 0 var(--p5-red);
+    clip-path: none;
+    transform: none;
+    animation: slideUpP5 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .dossier-body .p5-card:nth-child(n) {
+    transform: none;
+  }
+}
+
+@keyframes slideUpP5 {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
