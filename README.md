@@ -1,6 +1,6 @@
 # Portofolio — Alfian Wardyanto
 
-Website portofolio interaktif bergaya **Persona 5** untuk **Alfian Wardyanto** (*Software Engineer — Fraud Detection System* dengan pengalaman lebih dari 3 tahun di **PT. Asta Protek Jiarsi**).
+Website portofolio interaktif bergaya **Persona 5** untuk **Alfian Wardyanto** (*Software Engineer — Fraud Detection System*).
 
 ## Fitur Utama
 
