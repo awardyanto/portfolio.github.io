@@ -610,6 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLangUI();
 
   langSwitch.addEventListener('click', () => {
+    langSwitch.blur();
     playSfx('select');
     currentLang = currentLang === 'id' ? 'en' : 'id';
     localStorage.setItem('portfolio_lang', currentLang);
@@ -621,22 +622,73 @@ document.addEventListener('DOMContentLoaded', () => {
   // 7. NAVIGASI KEYBOARD (PANAH, ENTER, ESC)
   // =========================================
   let focusIdx = -1;
+  const sectionMenuItems = menuItems.filter(item => Boolean(item.dataset.section));
+
+  const highlightMenuByIndex = (idx) => {
+    menuItems.forEach(item => item.classList.remove('active-key'));
+    if (idx < 0 || idx >= menuItems.length) return;
+    focusIdx = idx;
+    const targetItem = menuItems[focusIdx];
+    targetItem.classList.add('active-key');
+    targetItem.focus({ preventScroll: true });
+  };
+
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('open')) {
+      e.preventDefault();
       closeModal();
+      if (focusIdx >= 0 && menuItems[focusIdx]) {
+        setTimeout(() => menuItems[focusIdx].focus({ preventScroll: true }), 160);
+      }
       return;
     }
 
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
       e.preventDefault();
       playSfx('hover');
-      menuItems.forEach(item => item.classList.remove('active-key'));
-      focusIdx = e.key === 'ArrowDown'
-        ? (focusIdx + 1) % menuItems.length
-        : (focusIdx - 1 + menuItems.length) % menuItems.length;
-      menuItems[focusIdx].classList.add('active-key');
-    } else if (e.key === 'Enter' && focusIdx >= 0) {
-      menuItems[focusIdx].click();
+
+      const isNext = e.key === 'ArrowDown' || e.key === 'ArrowRight';
+
+      // Jika modal sedang terbuka, langsung pindah ke section berikutnya/sebelumnya
+      if (modal.classList.contains('open') && sectionMenuItems.length > 0) {
+        const currentSecIdx = sectionMenuItems.findIndex(
+          item => item.dataset.section === activeSection
+        );
+        const nextSecIdx = currentSecIdx === -1
+          ? 0
+          : isNext
+            ? (currentSecIdx + 1) % sectionMenuItems.length
+            : (currentSecIdx - 1 + sectionMenuItems.length) % sectionMenuItems.length;
+
+        const nextSecItem = sectionMenuItems[nextSecIdx];
+        const globalIdx = menuItems.indexOf(nextSecItem);
+        if (globalIdx !== -1) highlightMenuByIndex(globalIdx);
+        openSection(nextSecItem.dataset.section, true);
+        return;
+      }
+
+      // Navigasi menu utama saat modal tertutup
+      const nextIdx = focusIdx === -1
+        ? (isNext ? 0 : menuItems.length - 1)
+        : isNext
+          ? (focusIdx + 1) % menuItems.length
+          : (focusIdx - 1 + menuItems.length) % menuItems.length;
+
+      highlightMenuByIndex(nextIdx);
+      return;
+    }
+
+    if (e.key === 'Enter' && !modal.classList.contains('open') && focusIdx >= 0) {
+      e.preventDefault();
+      const targetItem = menuItems[focusIdx];
+      if (!targetItem) return;
+
+      if (targetItem.dataset.section) {
+        openSection(targetItem.dataset.section, true);
+      } else {
+        playSfx('select');
+        targetItem.click();
+      }
     }
   });
 
